@@ -12,16 +12,8 @@ pub fn get_response(message: &Message) -> Value {
         .with_header("Authorization", format!("Bearer {}", api_token))
         .with_body(
             json!({
-                "model": "deepseek/deepseek-r1:free",
+                "model": "deepseek/deepseek-r1-distill-llama-70b:free",
                 "messages": [
-                    {
-                        "role": "user",
-                        "content": "wake up"
-                    },
-                    {
-                        "role": "assistant",
-                        "content": "Greetings"
-                    },
                     {
                         "role": "user",
                         "content": format!("{}", message.text)
