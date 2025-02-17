@@ -56,6 +56,11 @@ pub fn get_response(message: &Message) -> Value {
         .unwrap()[0]
         ["message"]
         .get("content")
+        .unwrap()
+        .as_str()
+        .unwrap()
+        .split("\n")
+        .last()
         .unwrap();
 
     let response = json!({
