@@ -38,19 +38,14 @@ pub fn get_response(message: &Message) -> Value {
         )
         .send()
     {
-        Ok(res) => serde_json::from_str(
-                res.as_str()
-                .unwrap())
-            .unwrap(),
+        Ok(res) => serde_json::from_str(res.as_str().unwrap()).unwrap(),
         Err(_) => json!({}),
     };
 
     //handle and format response
     let ai_message: &str = match ai_response["choices"][0].as_object() {
-        Some(obj) => {
-            obj["message"]["content"].as_str().unwrap()
-        },
-        None => "Failed to get response from AI"
+        Some(obj) => obj["message"]["content"].as_str().unwrap(),
+        None => "Failed to get response from AI",
     };
 
     let response = json!({
